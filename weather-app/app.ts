@@ -3,11 +3,17 @@ import { key } from "./secrets.ts";
 interface weatherData {
   main: {
     temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    humididy: number;
+    pressure: number;
   };
   weather: {
     0: {
-      id: string;
+      id: number;
       description: string;
+      icon: string;
     };
   };
 }
@@ -20,7 +26,7 @@ const weatherReq = async (): Promise<weatherData> => {
   return response.json();
 };
 
-const data: weatherData = await weatherReq();
+const data = await weatherReq();
 
 const temperature = data.main.temp;
 const description = data.weather[0].description;
